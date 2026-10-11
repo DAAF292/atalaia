@@ -18,7 +18,35 @@ Fecha: 2026-10-11. **Primera pasada, no definitiva.** Los precios salen de las p
 | DeepSeek | `deepseek-flash`, `deepseek-v4-pro` | **no verificado** | | | La página consultada no mostraba precios |
 | Mistral | Small 4 / Medium 3.5 | **no verificado** | | | Pesos abiertos (Apache 2.0 / MIT modificada) |
 
-Lectura rápida: en la gama barata **Haiku 5.5 sigue siendo el más barato** en entrada y salida entre los verificados; Luna de OpenAI y los Flash-Lite de Google están en 2-3× de precio. La diferencia absoluta con tu volumen (centenas de miles de tokens al día) es de céntimos a pocos dólares al mes, así que **el precio no debe decidir solo**.
+Lectura rápida: entre los **modelos de las páginas oficiales de Anthropic, OpenAI y Google**, Haiku 5.5 es el más barato (**la sección 1b corrige esto: no lo es frente a los modelos abiertos que sirve OpenRouter**); Luna de OpenAI y los Flash-Lite de Google están en 2-3× de precio. La diferencia absoluta con tu volumen (centenas de miles de tokens al día) es de céntimos a pocos dólares al mes, así que **el precio no debe decidir solo**.
+
+## 1b. Candidatos vía OpenRouter (precios listados el 2026-10-11)
+
+OpenRouter es un agregador con una sola API compatible con OpenAI. El precio que muestra es el de **uno** de los hosts que sirven el modelo, y varía según el host; "herramientas: indicado" significa que la descripción del modelo en la página menciona tool calling, **"no indicado" no quiere decir que no lo tenga**, solo que no lo verifiqué. Todo hay que comprobarlo con evals.
+
+| Familia | Modelo (slug) | Entrada | Salida | Contexto | Herramientas |
+|---|---|---|---|---|---|
+| DeepSeek | `deepseek/deepseek-v4.1-flash` | 0,035 | 0,14 | 1,05M | no indicado |
+| DeepSeek | `deepseek/deepseek-v4-pro` (0423) | 0,17 | 0,34 | 1,05M | no indicado |
+| DeepSeek | `deepseek/deepseek-v3.2` | 0,21 | 0,31 | 164K | no indicado |
+| DeepSeek | `deepseek/deepseek-chat-v3.1` | 0,25 | 0,95 | 164K | indicado |
+| MiniMax | `minimax/minimax-m3` | 0,23 | 0,96 | 1,05M | descripción lo menciona |
+| MiniMax | `minimax/minimax-m2.7` | 0,21 | 0,84 | 205K | no indicado |
+| Alibaba | `qwen3.7-flash` | 0,03 | 0,13 | 1M | no indicado |
+| Alibaba | `qwen3.6-35b-a3b` | 0,05 | 0,70 | 262K | indicado |
+| Alibaba | `qwen3-30b-a3b-instruct-2507` | 0,09 | 0,30 | 262K | indicado |
+| Alibaba | `qwen3-next-80b-a3b-instruct` | 0,09 | 1,10 | 262K | indicado |
+| Alibaba | `qwen-plus` | 0,26 | 0,78 | 1M | no indicado |
+| Alibaba | `qwen3.7-plus` | 0,32 | 1,28 | 1M | no indicado |
+
+**Lectura crítica**
+- Corrijo lo que dije antes: **Haiku 5.5 (0,10 / 0,50) no es el más barato**. DeepSeek V4.1 Flash y Qwen 3.7 Flash están en 0,03-0,04 de entrada y ~0,13-0,14 de salida: 3-4 veces menos. Y los candidatos con herramientas indicadas (Qwen 3.6 35B-A3B, Qwen3 30B-A3B) están en 0,05-0,09 de entrada.
+- Pero a tu volumen (~1 $/mes con Haiku) ahorrar el 70 % son céntimos. El criterio real es **fiabilidad con herramientas, privacidad y latencia**, no el precio.
+- Muchos modelos abiertos son de **pesos abiertos** (Qwen3, DeepSeek): se pueden alojar tú mismo, con otro host europeo o, con 32 GB de RAM, versiones pequeñas en local. Eso resuelve el problema de privacidad que un API chino no resuelve.
+- OpenRouter enruta a hosts distintos, con políticas de retención diferentes; permite filtrar por proveedores que no guarden datos, pero lo tengo que verificar antes de recomendarlo para datos personales.
+- Para el modelo "bueno" cuando haga falta calidad, la tabla muestra Qwen 3.8 Max / 3.7 Max (1,5-2 $ de entrada) y los de Anthropic/OpenAI: aquí sí hay que medir.
+
+**Consecuencia para el diseño:** OpenRouter encaja como **un adaptador "compatible con OpenAI" con otra URL base**. Con un solo adaptador puedes probar decenas de modelos en el estudio de la sección 4 sin escribir uno por proveedor; para producción se decide después, con datos.
 
 ## 2. Lo que el precio por token no te dice
 
@@ -39,13 +67,13 @@ El diseño actual (`ProveedorLLM` sobre el SDK de Anthropic) ya iba en esta dire
 - **Tope de coste y trazas** en la interfaz, independientes del proveedor (ya decidido en #35 y #38).
 - **Pruebas de contrato**: una misma batería de tests que cualquier adaptador debe pasar, y adaptador falso para el modo demo y la CI sin red ni claves.
 - **Qué no se abstrae**: funciones exclusivas (extended thinking, búsqueda web del proveedor, herramientas de servidor). Si se usan, quedan detrás de una capacidad opcional que declara el adaptador.
-- **Alternativa descartada por ahora**: un agregador (OpenRouter u otro) como único adaptador. Simplifica, pero añade un intermediario con el que pasan tus datos, y se pierde justo lo que enseña el proyecto. Sigue siendo válido como un adaptador más para probar modelos.
+- **OpenRouter**: entra como un adaptador más (el compatible con OpenAI con otra URL) para el estudio. No como único camino en producción: añade un intermediario por el que pasan tus datos y la interfaz propia es lo que enseña el proyecto.
 - LiteLLM/LangChain siguen descartados (#13): la interfaz propia es más pequeña y es lo que te preguntarán en entrevista.
 
 ## 4. Cómo se elige de verdad: el estudio medido
 
 1. **Batería de evals de laIA** (fase 2): preguntas con herramienta esperada, argumentos esperados, casos de inyección de prompt y de herramienta inexistente.
-2. **Candidatos iniciales** (3-5): Haiku 5.5, GPT-5.6 Luna, un Flash-Lite de Google, un modelo de pesos abiertos servido por API (DeepSeek o Mistral Small) y uno local pequeño como línea base.
+2. **Candidatos iniciales** (5-8): Haiku 5.5, GPT-5.6 Luna, un Flash-Lite de Google, DeepSeek V4.1 Flash, MiniMax M3, Qwen3.6 35B-A3B y Qwen 3.7 Plus (los cuatro últimos vía OpenRouter) y un modelo local pequeño como línea base.
 3. **Métricas**: acierto de herramienta y de argumentos, coste por pregunta, latencia p50/p95, tasa de error. Se publica la tabla en el README (es material de entrevista).
 4. **Modelo por defecto** = el más barato que supere el umbral de acierto que fijes (propongo 90 % en herramienta correcta, a discutir). Un modelo mejor se usa solo donde la tabla lo justifique.
 5. Repetir el estudio cuando salgan modelos nuevos: con el proveedor abstracto cuesta una línea de configuración.
