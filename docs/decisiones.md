@@ -71,11 +71,11 @@ Estado: **D** = decidido por Diego · **P** = propuesto por Claude y no objetado
 | 5 | laIA v1 = agente del homelab y de las herramientas del ecosistema | P (deducido de Diego) | Ecosistema §4 |
 | 6 | Calendario y notas **propios**, sin depender de Google u otros servicios | D | Visión §4.4 |
 | 7 | "Secretario" descartado: quedan **Notas** y **Agenda**; el papel de secretario lo hace laIA | D | Visión §4.1 |
-| 8 | "Tareas" deja de ser herramienta: son notas de tipo tarea con recordatorio en Agenda | R | Visión §4.2 |
+| 8 | "Tareas" deja de ser herramienta: son notas de tipo tarea con recordatorio en Agenda | D (2026-10-11) | Visión §4.2 |
 | 9 | Rumbo (empleo) no es prioritaria: después de Bitácora | D | Visión §4.1 |
 | 10 | Hito: lo terminado en primavera de 2027 va al CV (realista: Dashboard y laIA) | D/P | Visión §7 |
 | 11 | Hoja de ruta: 0 Cimientos · 1 Dashboard · 2 laIA · 3 Copias · 4 Voz + Notas · 4b Agenda · 5 Móvil · 6 Bitácora · 7 Vigía · 8 Conocimiento | P | Visión §7 |
-| 12 | La copia del host Proxmox se hace ya en HomeLab; AtalaIA Copias cubre los datos del ecosistema y las pruebas de restauración | R | Visión §4.4 |
+| 12 | La copia del host Proxmox se hace ya en HomeLab; AtalaIA Copias cubre los datos del ecosistema y las pruebas de restauración | D (2026-10-11) | Visión §4.4 |
 | 13 | Descartados: Home Assistant, palabra de activación, Uptime Kuma y Docker de `dev` como fuentes, LiteLLM, LangChain, Kubernetes, Personas, Hábitos, Domótica, CalDAV propio, Radicale, Neo4j, base vectorial aparte | D/P | Visión §4.3 |
 
 ### Repo y forma de trabajar
@@ -97,7 +97,7 @@ Estado: **D** = decidido por Diego · **P** = propuesto por Claude y no objetado
 | 21 | Eventos con sobre común tipo CloudEvents, por SSE y webhooks firmados; sin broker hasta que dos consumidores lo necesiten | P | Ecosistema §3.2 |
 | 22 | Identidad con Authelia (forward auth; OIDC + PKCE para el móvil) | P | Ecosistema §3.3 |
 | 23 | Echo Show con **token de dispositivo**; bypass por IP solo provisional | P | Portfolio §7.6 |
-| 24 | Direcciones: `atalaia.daaf-lab.link` portada, `<herramienta>.atalaia.daaf-lab.link`, registro DNS comodín | R | Ecosistema §3.3 |
+| 24 | Direcciones: `atalaia.daaf-lab.link` portada, `<herramienta>.atalaia.daaf-lab.link`, registro DNS comodín | D (2026-10-11) | Ecosistema §3.3 |
 | 25 | Backend Python 3.13 + FastAPI + Pydantic v2 + httpx; puertos y adaptadores | P | Portfolio §5 |
 | 26 | Frontend TypeScript + Vite + Preact (signals), tipos generados desde OpenAPI, uPlot | P | Portfolio §5 |
 | 27 | SSE con `Last-Event-ID` para el tiempo real | P | Portfolio §5 |
@@ -107,17 +107,19 @@ Estado: **D** = decidido por Diego · **P** = propuesto por Claude y no objetado
 | 31 | Agenda sobre iCalendar/RRULE con librerías, enlace `.ics`, sin CalDAV | P (sobre la D #6) | Visión §4.4 |
 | 32 | Notas en Markdown, enlaces `[[...]]`, importación de Obsidian en un sentido, exportable; conflictos: última escritura + historial, CRDT solo si hace falta | P (sobre la D #6) | Visión §4.4 |
 | 33 | Móvil: PWA y después React Native + Expo, por Tailscale | P | Visión §4.4 |
-| 34 | Dashboard v1 **sin IA**; el diagnóstico de fallos con IA se añade después de laIA | R | Ecosistema §4 |
-| 35 | Trazas de cada llamada al LLM desde la fase 2 | R | Ecosistema §4 |
+| 34 | Dashboard v1 **sin IA**; el diagnóstico de fallos con IA se añade después de laIA | D (2026-10-11) | Ecosistema §4 |
+| 35 | Trazas de cada llamada al LLM desde la fase 2 | D (2026-10-11) | Ecosistema §4 |
 | 36 | CI en GitHub Actions (lint, tipos, tests, GHCR, gitleaks); despliegue por pull con el patrón `deploy.sh` | P | Portfolio §5 |
 | 37 | Modo demo con recolector falso en todas las herramientas; demo pública opcional por Cloudflare Tunnel | P | Portfolio §6 |
+| 38 | **Coste de la API de Claude como criterio de diseño**: Haiku por defecto, subir de modelo solo si las evals lo justifican; tope de iteraciones y de gasto diario en `ProveedorLLM`; caché de prompts; Batch API para evals | R (2026-10-11) | docs/costes-api.md |
 
 ### Pendientes de Diego
 
 | # | Pregunta | Cuándo hace falta | Recomendación |
 |---|---|---|---|
 | ⏳ 1 | ¿Pueden notas, agenda y lecturas ir a la API de Claude? | Fase 4 | Sí, solo el fragmento necesario, con etiqueta de sensibilidad; lo privado a local cuando haya 32 GB |
-| ⏳ 2 | Visto bueno a las propuestas **R** (#8, #12, #24, #34, #35) | Antes de la fase 0 | Aceptarlas |
+| ✅ 2 | Visto bueno a las propuestas **R** (#8, #12, #24, #34, #35) | — | Aceptadas por Diego el 2026-10-11 |
+| ⏳ 3 | Licencia del repo público | Sin prisa | Diego: se deja sin licencia de momento (2026-10-11) |
 
 ---
 
