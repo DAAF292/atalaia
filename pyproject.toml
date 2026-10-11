@@ -1,0 +1,46 @@
+# Raíz del espacio de trabajo de uv (Python). Aquí solo viven las herramientas
+# comunes de calidad; cada proyecto Python (apps/dashboard/backend, paquetes/contratos...)
+# tendrá su propio pyproject.toml y se añadirá a [tool.uv.workspace] al crearlo.
+[project]
+name = "atalaia"
+version = "0.0.0"
+description = "Ecosistema personal de herramientas con IA"
+requires-python = ">=3.13"
+dependencies = []
+
+[dependency-groups]
+dev = [
+    "ruff>=0.14",
+    "mypy>=1.13",
+    "pytest>=8.3",
+    "pytest-asyncio>=0.24",
+]
+
+[tool.uv]
+package = false
+
+[tool.ruff]
+line-length = 100
+target-version = "py313"
+
+[tool.ruff.lint]
+select = [
+    "E", "F", "W",  # pycodestyle y pyflakes
+    "I",            # orden de imports
+    "B",            # errores probables (bugbear)
+    "UP",           # sintaxis moderna de Python
+    "SIM",          # simplificaciones
+    "ASYNC",        # fallos típicos de código asíncrono
+    "S",            # seguridad básica (bandit)
+]
+
+[tool.ruff.lint.per-file-ignores]
+"**/tests/**" = ["S101"]  # assert es lo normal en tests
+
+[tool.mypy]
+python_version = "3.13"
+strict = true
+plugins = ["pydantic.mypy"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"

@@ -1,0 +1,31 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+.ruff_cache/
+.mypy_cache/
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Node
+node_modules/
+dist/
+*.tsbuildinfo
+
+# Entorno y secretos: NUNCA al repo (es público). Solo se versionan los .env.ejemplo
+.env
+.env.*
+!.env.ejemplo
+
+# Datos locales
+*.db
+*.sqlite
+*.sqlite3
+
+# Editores y sistema
+.idea/
+.vscode/*
+!.vscode/extensions.json
+.DS_Store
+Thumbs.db
