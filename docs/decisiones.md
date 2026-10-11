@@ -101,7 +101,7 @@ Estado: **D** = decidido por Diego · **P** = propuesto por Claude y no objetado
 | 25 | Backend Python 3.13 + FastAPI + Pydantic v2 + httpx; puertos y adaptadores | P | Portfolio §5 |
 | 26 | Frontend TypeScript + Vite + Preact (signals), tipos generados desde OpenAPI, uPlot | P | Portfolio §5 |
 | 27 | SSE con `Last-Event-ID` para el tiempo real | P | Portfolio §5 |
-| 28 | `ProveedorLLM` propio sobre el SDK de Anthropic, Haiku por defecto; router por sensibilidad más adelante | P | Ecosistema §4 |
+| 28 | `ProveedorLLM` propio sobre el SDK de Anthropic, Haiku por defecto; router por sensibilidad más adelante | P (revisada por #39) | Ecosistema §4 |
 | 29 | Voz local: faster-whisper + Piper en el LXC "ai"; pulsar para hablar; **el audio nunca sale de casa** | D/P | Visión §5 |
 | 30 | SQLite en el Dashboard y, al principio, en laIA; **Cerebro** = PostgreSQL + pgvector desde Notas | P | Visión §3 |
 | 31 | Agenda sobre iCalendar/RRULE con librerías, enlace `.ics`, sin CalDAV | P (sobre la D #6) | Visión §4.4 |
@@ -112,6 +112,7 @@ Estado: **D** = decidido por Diego · **P** = propuesto por Claude y no objetado
 | 36 | CI en GitHub Actions (lint, tipos, tests, GHCR, gitleaks); despliegue por pull con el patrón `deploy.sh` | P | Portfolio §5 |
 | 37 | Modo demo con recolector falso en todas las herramientas; demo pública opcional por Cloudflare Tunnel | P | Portfolio §6 |
 | 38 | **Coste de la API de Claude como criterio de diseño**: Haiku por defecto, subir de modelo solo si las evals lo justifican; tope de iteraciones y de gasto diario en `ProveedorLLM`; caché de prompts; Batch API para evals | R (2026-10-11) | docs/costes-api.md |
+| 39 | **Proveedor de LLM multi-fuente**: `ProveedorLLM` con formato neutro y adaptadores (Anthropic y dialecto compatible con OpenAI al principio); el modelo por defecto se elige con evals propias por coste por tarea, no por catálogo. Sustituye el "sobre el SDK de Anthropic" de #28 | R (2026-10-11) | docs/estudio-modelos.md |
 
 ### Pendientes de Diego
 

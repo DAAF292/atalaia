@@ -53,3 +53,5 @@ Sin caché los números suben (más en los modelos caros). Reserva: Haiku requie
 ## 5. Qué falta medir
 
 Tokens reales de una pregunta típica de laIA (el SDK devuelve `usage` en cada respuesta), tasa de acierto de Haiku en las evals, y si el caché se activa. Hasta entonces, las cifras de la sección 2 son órdenes de magnitud.
+
+> Nota (2026-10-11): la decisión #39 amplía este análisis a varios proveedores; ver docs/estudio-modelos.md.
