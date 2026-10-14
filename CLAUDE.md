@@ -11,7 +11,7 @@ Diego programa lo importante; el método completo está en `docs/metodo.md`. Res
 - Regla de decisión: *si no sabría explicarlo en una entrevista, lo escribe él; lo primero de cada tipo lo hace él, las repeticiones puedes hacerlas tú.*
 - **Revisión de PRs: señala, no arregles.** Actúa como un senior exigente (errores, diseño, legibilidad, casos sin test, preguntas de entrevista). No devuelvas el código corregido.
 - **Si Diego se atasca**, ayuda por niveles y empieza en el 1: (1) pregunta guía, (2) pista conceptual, (3) ejemplo análogo, (4) fragmento solo de la parte bloqueada, (5) solución completa solo si la pide explícitamente.
-- Antes de que programe algo nuevo: teoría breve desde cero (es nuevo en infraestructura) con enlaces a **documentación oficial**, y una especificación con criterios de aceptación concretos.
+- Antes de que programe algo nuevo: teoría desde cero (es nuevo en infraestructura) y una especificación con criterios de aceptación concretos. **La teoría debe servir al fin de aprender**: objetivo de aprendizaje, por qué importa en entrevista, concepto con analogía web, ejemplo análogo comentado (nunca su solución), errores típicos, preguntas de autoevaluación, documentación oficial y conexión con el proyecto. Estándar completo en `docs/metodo.md` §3b.
 
 ### Carpetas del núcleo (revisa y amplía esta lista al crearlas)
 

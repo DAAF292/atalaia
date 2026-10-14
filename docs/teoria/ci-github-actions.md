@@ -4,6 +4,25 @@ Este paso lo escribes **tú**. Aquí tienes (1) los conceptos desde cero, (2) ej
 
 > Versión 2 (2026-10-14). La primera era una lista de ideas sin explicar las tecnologías ni mostrar código. Esta lo corrige.
 
+## 0. Para qué sirve este paso (objetivos de aprendizaje)
+
+Al terminar este paso deberías poder, **sin mirar el material**:
+
+1. Explicar con tus palabras qué es la CI, qué problema resuelve y por qué un runner "nace vacío".
+2. Escribir y depurar un workflow con `on`, `jobs`, `steps`, `uses`, `run`, `needs` y `permissions`, y leer una ejecución fallida.
+3. Razonar y defender tus decisiones de diseño: un job o varios, versiones fijadas, permisos mínimos, `just ci` frente a comandos sueltos.
+4. Explicar por qué gitleaks está en la CI de un repo público.
+
+**Por qué importa en el mercado**: CI/CD es un requisito en casi cualquier oferta FullStack; saber montar un pipeline y razonar su seguridad (permisos, cadena de suministro) es de las cosas que más separan a un perfil que solo programa de uno que entrega.
+
+**Preguntas de entrevista que este paso te permite contestar**
+- ¿Qué pasa desde que haces `git push` hasta que ves el check verde en un PR?
+- ¿Por qué fijarías una acción por hash de commit en lugar de `@v4`?
+- ¿Cómo evitas que la CI y tu entorno local se desincronicen?
+- ¿Cómo sabes que tu CI no es decorativa?
+
+**Autoevaluación antes de empezar** (contesta por escrito en 1-2 líneas cada una, y dime las que no sepas): ¿qué es un runner? ¿por qué hay que hacer `checkout` en cada job? ¿qué diferencia hay entre `run` y `uses`? ¿qué hace que un job falle? Repite la lista al terminar: la diferencia es lo que has aprendido, y va a `docs/diario.md`.
+
 Documentación oficial de partida: https://docs.github.com/en/actions
 
 ---
@@ -264,6 +283,10 @@ atalaia/
 - just: https://just.systems/man/en/
 - Ruff: https://docs.astral.sh/ruff/ · mypy: https://mypy.readthedocs.io · pytest: https://docs.pytest.org
 
-## 11. Ayuda por niveles
+## 11. Conexión con AtalaIA
+
+Esta CI es la red de seguridad de todo lo que viene: cada herramienta del ecosistema se prueba aquí antes de desplegarse. En la fase 2 se ampliará para ejecutar las evals de laIA, y el despliegue en el homelab tirará de las imágenes que construya. Lo que decidas hoy sobre permisos y versiones se hereda.
+
+## 12. Ayuda por niveles
 
 Si te atascas, dime en qué punto y empiezo por una pregunta guía, después una pista, un ejemplo análogo, un fragmento y, solo si lo pides, la solución completa. Para depurar el YAML en local sin ensuciar el historial puedes usar `act` (https://github.com/nektos/act), con el matiz de que no replica exactamente los runners de GitHub.

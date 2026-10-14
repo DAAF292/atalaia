@@ -64,6 +64,23 @@ Trabajar con pull requests aunque estés solo no es burocracia: es exactamente e
 
 ---
 
+## 3b. Estándar de la teoría (añadido 2026-10-14)
+
+Diego lo dejó claro: **este proyecto es una forma de aprender, así que la teoría tiene que servir para lograr los fines que nos marcamos** (entender las tecnologías más demandadas y poder defender cada decisión en una entrevista), no ser un trámite previo al código. Todo documento de teoría de `docs/teoria/` cumple esto:
+
+1. **Objetivo de aprendizaje**: al terminar, ¿qué sabrás hacer y explicar? Redactado como capacidades comprobables, no como temas.
+2. **Por qué importa**: dónde aparece esto en el trabajo real y qué pregunta de entrevista responde.
+3. **El concepto desde cero**, con analogía de lo que Diego ya conoce (desarrollo web).
+4. **Ejemplo análogo**: la estructura en un caso distinto del suyo, comentado. Nunca su solución.
+5. **Errores típicos y cómo se diagnostican.**
+6. **Comprobación de comprensión**: preguntas que debe poder contestar con sus palabras, sin mirar, antes y después de implementar. Si no puede, la teoría no ha cumplido.
+7. **Documentación oficial** de cada tecnología, para aprender a leerla.
+8. **Conexión con el proyecto**: cómo esto encaja en AtalaIA y en su portfolio.
+
+La teoría se mide por lo que Diego es capaz de explicar y construir después, no por su extensión. Si tras leerla no puede ni plantear una pregunta concreta, está mal escrita y se rehace.
+
+---
+
 ## 4. Niveles de ayuda cuando te atascas
 
 Cuando pidas ayuda en algo que te toca a ti, se sube de nivel solo si el anterior no basta:
